@@ -21,8 +21,8 @@ export default function validation(dogData){
         errors.name = 'Invalid name. Please use only letters, spaces, and hyphens.';
     }
 
-    if (!regexOnlyLetters.test(dogData.temperaments)) {
-        errors.temperaments = 'Invalid temperaments. Please use only letters, spaces, and hyphens.';
+    if (!dogData.temperaments || dogData.temperaments.length === 0) {
+        errors.temperaments = 'Please select at least one temperament.';
     }
 
     if (!regexPosNumbers.test(dogData.lifespan)) {
@@ -37,11 +37,11 @@ export default function validation(dogData){
         errors.weight = 'Invalid weight. Please enter positive numbers, and make sure min values are less than max values.';
     }
 
-    for (const key in dogData) {
+    /*for (const key in dogData) {
         if (!regexIsNotEmpty.test(dogData[key])) {
           errors[key] = 'Field cannot be empty.';
         }
-    }
+    }*/
       
 
     return errors

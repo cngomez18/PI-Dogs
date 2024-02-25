@@ -13,14 +13,16 @@ export default function Detail(){
   
   const {id} = useParams();
   const [dog, setDog] = useState({});
+  
   useEffect(() => {
       axios(`http://localhost:3001/dogs/${id}`)
       .then(
           ({ data }) => {
+            console.log('Data:', data);
             if (data.name) {
-                setDog(data);
+              setDog(data);
             } else {
-                window.alert('No dogs with that Id');
+              window.alert('No dogs with that Id');
             }
           }
       );
@@ -29,19 +31,17 @@ export default function Detail(){
 
   return(
     <div>
-    {dog.id === parseInt(id, 10) ?  (
-        <div>
-          <h2>Name: {dog.name} </h2>
-          <h4>Height: {dog.height}</h4>
-          <h4>Weight: {dog.weight}</h4>
-          <h4>Temperaments: {dog.temperaments}</h4>
-          <h4>Lifespan: {dog.lifespan}</h4>
-          <img src={dog.image} alt={dog.name} />
-        </div>
+    {dog.name ? (
+      <div>
+        <h2>Name: {dog.name} </h2>
+        <h4>Height: {dog.height.metric} cm</h4>
+        <h4>Weight: {dog.weight.metric} kg</h4>
+        <h4>Temperament: {dog.temperament}</h4>
+        <h4>Lifespan: {dog.life_span}</h4>
+        <img src={dog.dogImages[0].url} alt={dog.name} />
+      </div>
     ) : (
-        <p>
-          Dog ID {id} not found
-        </p>
+      <p>Loading...</p>
     )}
     </div>
   )

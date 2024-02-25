@@ -11,7 +11,7 @@ const getTemperaments = require('../controllers/getTemperaments')
 
 const router = Router();
 router.get('/dogs', getDogs)
-router.get('/dogs/:idRaza', getDogsById)
+router.get('/dogs/:id', getDogsById)
 router.get('dogs/name?="...',getDogName)
 router.post('/dogs', postDogs)
 router.get('/temperaments', getTemperaments)

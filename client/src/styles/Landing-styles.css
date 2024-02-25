@@ -1,0 +1,54 @@
+
+
+.landingContainer {
+    position: relative;
+    height: 100vh; /* Set the container to full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflow to prevent scrolling */
+}
+  
+.backgroundImageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+  
+.backgroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.enterButton {
+    position: relative; /* Set position to relative for absolute positioning of text */
+    z-index: 1;
+    background: url('dog-button.png') center center no-repeat; 
+    background-size: contain;
+    width: 200px; 
+    height: 200px; 
+    border: none;
+    cursor: pointer;
+}
+
+.enterButton a {
+    position: absolute;
+    bottom: 0; /* Position the text at the bottom of the button */
+    left: 0; /* Center the text horizontally */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align the text to the bottom */
+    text-align: center;
+    font-family: 'Gaegu', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    text-decoration: none;
+    color: #ba7f5d;
+}
