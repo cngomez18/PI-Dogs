@@ -8,6 +8,7 @@ import Nav from './components/Nav';
 import Form from './components/Form'
 import Detail from './components/Detail'
 import Pagination from './components/Pagination';
+import Home from './components/Home';
 import React from 'react';
  
 function App() {
@@ -22,27 +23,17 @@ function App() {
     setDogs(filterDogs);
   };
     
-  const onSearch = async (query) => {
-    try {
-      const response = await axios.get('https://api.thedogapi.com/v1/breeds');
-
-      const allBreeds = response.data.map((breed) => ({
-        id: breed.id,
-        name: breed.name,
-        weight: breed.weight?.metric,
-        temperaments: breed.temperament?.split(', ') || [],
-        image: `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`,
-      }));
-
-      const results = allBreeds.filter((breed) =>
-        breed.name.toLowerCase().includes(query.toLowerCase())
-      );
-
-      setDogs(results);
-    } catch (error) {
-      console.error('Error getting dog:', error);
-    }
+ /* const onSearch = (query) => {
+    console.log('Search query:', query);
+  
+    const results = dogs.filter((dog) =>
+      dog.name.toLowerCase().includes(query.toLowerCase())
+    );
+  
+    console.log("results:", results);
+    setDogs(results);
   };
+  */
 
   useEffect(() => {
 
@@ -72,13 +63,12 @@ function App() {
   return (
     <div className="App">
     
-    {renderNav && <Nav onSearch={onSearch} />}
 
       <Routes> 
   
         <Route path="/" element={<Landing />} />
 
-        <Route path="/home" element={<Pagination dogs={dogs} onClose={onClose} />} />
+        <Route path="/home" element={<Home dogs={dogs} onClose={onClose} />} />
 
         <Route path="/form" element={<Form availableTemperaments={availableTemperaments}/>} />
 

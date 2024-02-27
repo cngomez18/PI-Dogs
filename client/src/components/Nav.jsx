@@ -1,7 +1,7 @@
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 
-export default function Nav({onSearch}){
+export default function Nav(){
   return(
     <div>
 
@@ -13,7 +13,7 @@ export default function Nav({onSearch}){
           <Link to="/form">Form</Link>
       </button>
 
-      <SearchBar onSearch={onSearch}/>
+      <SearchBar/>
     </div>
   )
 }

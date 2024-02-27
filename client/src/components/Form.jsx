@@ -32,11 +32,8 @@ export default function Form({ availableTemperaments }){
         event.preventDefault();
         console.log('Dog Data:', dogData);
         try {
-            // Make API request to create a dog
-            // Combine minHeight and maxHeight into a single height field
             const height = `${dogData.minHeight}-${dogData.maxHeight}`;
 
-            // Combine minWeight and maxWeight into a single weight field
             const weight = `${dogData.minWeight}-${dogData.maxWeight}`;
 
             // Create a new object with the combined values
@@ -57,11 +54,10 @@ export default function Form({ availableTemperaments }){
               window.alert('Dog created successfully!');
               // Additional logic if needed...
             } else {
-              // Handle other status codes if needed
               window.alert('Failed to create dog. Please try again.');
             }
           } catch (error) {
-            // Handle API request error
+            
             console.error('Error creating dog:', error);
             window.alert('Error creating dog. Please try again.');
           }

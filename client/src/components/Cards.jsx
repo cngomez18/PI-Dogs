@@ -2,11 +2,11 @@ import Card from './Card';
 import { connect, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { filterTemperament, filterOrigin, sortAlphabetical, sortWeight, setDogs  } from '../redux/actions.js';
+import { filterTemperament, filterOrigin, sortAlphabetical, sortWeight, setDogs, searchDogs  } from '../redux/actions.js';
 
-function Cards({ dogs, onClose, applySortWeight, applyFilterOrigin, applyFilterTemperament, applySortAlphabetical, applySetDogs}) {
+function Cards({ dogs, onClose, searchResults ,applySortWeight, applyFilterOrigin, applyFilterTemperament, applySortAlphabetical, applySetDogs, applySearchDogs}) {
  
-  console.log('Received Props:', { dogs });
+  console.log('Received Props in Cards:', { dogs });
 
 
   const dispatch = useDispatch(); // Get the dispatch function from react-redux
@@ -20,7 +20,8 @@ function Cards({ dogs, onClose, applySortWeight, applyFilterOrigin, applyFilterT
       try {
         const response = await axios.get('http://localhost:3001/dogs/');
         const dogsData = response.data;
-        setAllDogs(dogsData); // Use setAllDogs to update the state
+        console.log("ddata: ", dogsData)
+        setAllDogs(dogsData);
         dispatch(setDogs(dogsData))
 
         const resTemps = await axios.get('http://localhost:3001/temperaments/');
@@ -33,9 +34,12 @@ function Cards({ dogs, onClose, applySortWeight, applyFilterOrigin, applyFilterT
       }
     };
   
-    fetchData(); // Call the function to fetch data when the component mounts
+    fetchData(); 
   }, []);
 
+  useEffect(() => {
+    dispatch(setDogs(searchResults));
+  }, [searchResults]);
 
   const handleFilterTemp = (e) => {
     const selectedTemperament = e.target.value;
@@ -61,9 +65,9 @@ function Cards({ dogs, onClose, applySortWeight, applyFilterOrigin, applyFilterT
       </select>
 
 
-      <button onClick={() => applyFilterOrigin(dogs[0]?.origin)}>
+      {/*<button onClick={() => applyFilterOrigin(dogs[0]?.origin)}>
         Filter by Origin
-      </button>
+      </button>*/}
 
       <button onClick={applySortAlphabetical}>Sort Alphabetically</button>
 
@@ -87,19 +91,21 @@ function Cards({ dogs, onClose, applySortWeight, applyFilterOrigin, applyFilterT
   )
 }
 const mapStateToProps = (state) => {
-  console.log('Mapped State:', state);
+  console.log("state:",state.dogs)
   return {
     dogs: state.dogs,
+    searchResults: state.searchResults,
   };
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
   applyFilterTemperament: (temperament) => dispatch(filterTemperament(temperament)),
-  applyFilterOrigin: (origin) => dispatch(filterOrigin(origin)),
+ // applyFilterOrigin: (origin) => dispatch(filterOrigin(origin)),
   applySortAlphabetical: () => dispatch(sortAlphabetical()),
   applySortWeight: () => dispatch(sortWeight()),
   applySetDogs: (dogs) => dispatch(setDogs(dogs)),
+  applySearchDogs: (query) => dispatch(searchDogs(query)),
 });
 
 
