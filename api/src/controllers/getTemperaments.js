@@ -4,7 +4,7 @@ const axios = require('axios')
 const getTemperaments = async (req, res)=>{
     
     const URL = `https://api.thedogapi.com/v1/breeds/`
-    
+    const response = await axios.get(URL)
     
     try{
         const temperamentsAPI = response.data

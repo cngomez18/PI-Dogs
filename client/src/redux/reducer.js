@@ -1,49 +1,75 @@
-import { ADD_FAV, FILTER, REMOVE_FAV, ORDER } from "./actionTypes"
+// reducer.js
+import{FILTER_ORIGIN, FILTER_TEMPERAMENT, SORT_ALPHABETICAL, SORT_WEIGHT, SET_DOGS} from './actionTypes'
 
 const initialState = {
-    myFavorites: [],
-    allCharacters: []
-}
+  dogs: [], // Assuming your dogs are stored in this array  
+};
+  
+const reducer = (state = initialState, action) => {
+    console.log('Action:', action); // Log the dispatched action
+    console.log('Current State:', state); // Log the current state
+    switch (action.type) {
 
-function reducer(state = initialState, { type, payload }){
-    switch(type){
-        case 'ADD_FAV':
-            return { ...state, myFavorites: payload, allCharacters: payload };
-        case 'REMOVE_FAV':
-            return { ...state, myFavorites: payload };    
-        /*case ADD_FAV:
-           return {
+      case SET_DOGS:
+      return {
+        ...state,
+        dogs: action.payload.dogs,
+      };
+      
+      case 'FILTER_TEMPERAMENT':
+        const targetTemperament = action.payload.temperament[0];
+        
+        return {
+          ...state,
+          dogs: state.dogs
+            ? state.dogs.filter((dog) =>
+                dog.temperaments.includes(targetTemperament)
+              )
+            : [],
+        };
+      
+        
+        case FILTER_ORIGIN:
+          const filteredDogsByOrigin = state.dogs.filter(
+            (dog) => dog.origin === action.payload.origin
+          );
+        
+          return {
             ...state,
-            myFavorites:[payload, ...state.allCharacters],
-            allCharacters:[payload, ...state.allCharacters]
-            case REMOVE_FAV:
+            filteredDogs: filteredDogsByOrigin,
+            filters: {
+              ...state.filters,
+              origin: action.payload.origin,
+            },
+          };
+        
+          
+        
+      
+            case SORT_ALPHABETICAL:
+              return {
+                ...state,
+                dogs: state.dogs ? [...state.dogs].sort((a, b) => a.name.localeCompare(b.name)) : [],
+              };
+        
+              case SORT_WEIGHT:
+
+              const getAverageWeight = (weightString) => {
+                const [min, max] = weightString.split('-').map((val) => parseInt(val.trim()));
+                return (min + max) / 2;
+              };
+
                 return {
-                    ...state,
-                    myFavorites: state.myFavorites.filter(char => char.id !== parseInt(payload)),
-                allCharacters: state.allCharacters.filter(char => char.id !== payload)
-            }
-        }*/
-        case FILTER:
-            const genderFiltered = state.allCharacters.filter(char => char.gender ===payload)
+                  ...state,
+                  dogs: state.dogs
+                    ? [...state.dogs].sort((a, b) => getAverageWeight(a.weight) - getAverageWeight(b.weight))
+                    : [],
+                };
 
-            return {
-                ...state,
-                myFavorites:payload === 'All' ? state.allCharacters : genderFiltered
-            }    
-        case ORDER:
-
-            const orderedCharacters = state.myFavorites.sort((a,b)=>{
-                if(payload === 'A') return a.id - b.id
-                return b.id - a.id
-            })
-
-            return {
-                ...state,
-                myFavorites: [...orderedCharacters]
-            }     
         default:
-            return state
+            return state;
     }
-}
-
-export default reducer
+};
+  
+export default reducer;
+  

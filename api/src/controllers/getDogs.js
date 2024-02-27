@@ -19,6 +19,7 @@ const getDogs = async (req,res)=>{
                 name: apiDog.name,
                 weight: apiDog.weight.metric || 'N/A',
                 temperaments: apiDog.temperament?.split(', ') || [],
+                origin: apiDog.origin,
                 image:`https://cdn2.thedogapi.com/images/${apiDog.reference_image_id}.jpg`
         }});
         

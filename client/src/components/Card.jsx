@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 
 
-function Card({id,onClose,name,weight,temperaments,image}) {
+function Card({ id, onClose, name, weight, temperaments, image }) {
   //console.log("temperaments:", temperaments);
   //console.log("image:", image);
   //console.log("weight:", weight);

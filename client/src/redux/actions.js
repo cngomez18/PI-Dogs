@@ -1,66 +1,28 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./actionTypes";
-import axios from 'axios'
+import { FILTER_ORIGIN, FILTER_TEMPERAMENT, SORT_ALPHABETICAL, SORT_WEIGHT, SET_DOGS } from "./actionTypes";
 
-export const addFav = (character) => {
-    const endpoint = 'http://localhost:3001/rickandmorty/fav';
 
-    return async (dispatch) => {
-       try{
-        const response= await axios.post(endpoint, character)
-        const {data}=response
-
-        dispatch({
-           type: 'ADD_FAV',
-           payload: data,
-        });
-       }catch(error){
-        console.log(error.message)
-       }
-    };
-};
-
-export const removeFav = (id) => {
-   const endpoint = 'http://localhost:3001/rickandmorty/fav/' + id;
+export const filterTemperament = (temperament) => ({
+    type: FILTER_TEMPERAMENT,
+    payload: {
+        temperament: temperament, // Make sure it's an array
+      },
+});
   
-   return async (dispatch) => {
-    try{
-        const response= await axios.delete(endpoint)
-        const {data}= response
-        dispatch({
-            type: 'REMOVE_FAV',
-            payload: data,
-      })
+export const filterOrigin = (origin) => ({
+    type: FILTER_ORIGIN,
+    payload: {origin},
+});
 
-    }catch(error){
-        console.log(error.message)
-    }
-   };
-};
+export const sortAlphabetical = () => ({
+    type: SORT_ALPHABETICAL,
+});
 
-export const filterCards = (gender)=>(
-    {
-        type: FILTER,
-        payload: gender
-    }
-)
+export const sortWeight = () => ({
+    type: SORT_WEIGHT,
+});
 
-export const orderCards = (orden)=>(
-    {
-        type: ORDER,
-        payload: orden
-    }
-)
-
-/*export const addFav = (character) => (
-    {
-        type: ADD_FAV,
-        payload: character
-    }
-)*/
-
-/*export const removeFav = (id) => (
-    {
-        type: REMOVE_FAV,
-        payload: id
-    }
-)*/
+export const setDogs = (dogs) => ({
+    type: SET_DOGS,
+    payload: { dogs },
+  });
+  

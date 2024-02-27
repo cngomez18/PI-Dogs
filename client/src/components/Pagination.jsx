@@ -30,13 +30,13 @@ export default function Pagination({onClose,dogs}) {
         <Cards dogs={dogsOnCurrentPage} onClose={onClose} />
         {/* Pagination controls */}
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
-        Previous Page
+            Previous Page
         </button>
         
         <span>{`Page ${currentPage} of ${totalPages}`}</span>
 
         <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-        Next Page
+            Next Page
         </button>
     </div>
 );

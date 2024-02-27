@@ -1,4 +1,5 @@
-export const ADD_FAV = 'ADD_FAV';
-export const REMOVE_FAV = 'REMOVE_FAV';
-export const FILTER = 'FILTER'
-export const ORDER = 'ORDER'
+export const FILTER_TEMPERAMENT = 'FILTER_TEMPERAMENT';
+export const FILTER_ORIGIN = 'FILTER_ORIGIN';
+export const SORT_ALPHABETICAL = 'SORT_ALPHABETICAL'
+export const SORT_WEIGHT = 'SORT_WEIGHT'
+export const SET_DOGS = 'SET_DOGS'
