@@ -1,0 +1,49 @@
+/* Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4b158;
+    color: white;
+    padding: 10px;
+    font-family: 'Gaegu', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  
+    .navbar-left a,
+    .navbar-center a {
+      text-decoration: none;
+      color: #715c49;
+    }
+  
+    .navbar-left button,
+    .navbar-center button {
+      padding: 8px 16px;
+      margin-left: 8px;
+      border-radius: 8px;
+      background-color: #fbbd6a;
+      color: #715c49;
+      border: none;
+      cursor: pointer;
+    }
+  
+    .navbar-center {
+      flex-grow: 1;
+      padding: 8px 16px;
+      margin-left: 8px;
+      border-radius: 8px;
+      /* Add styling for the search bar */
+      display: flex;
+      align-items: center;
+    }
+  
+    /* Style the input element within the .navbar-center */
+    .navbar-center input[type="text"] {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px; /* Adjust font size as needed */
+    }
+  }
+  

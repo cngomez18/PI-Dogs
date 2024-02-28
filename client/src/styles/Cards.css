@@ -1,0 +1,64 @@
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    z-index: 1; /* Set a higher z-index to make the filter-bar appear on top */
+}
+
+.filter-bar select,
+.filter-bar button {
+    padding: 8px 16px;
+    margin: 8px;
+    border-radius: 8px;
+    background-color: #fbbd6a;
+    color: #715c49;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-bar select {
+    font-family: 'Gaegu', sans-serif;
+    font-size: 14px; /* Adjust font size as needed */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for transparency */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow */
+    max-width: 100%; /* Adjust the max-width as needed */
+    width: 80%; 
+    height: auto /* Adjust the height as needed */
+}
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    max-width: 100%; /* Adjust the max-width as needed */
+    margin: 0 auto;
+    padding:2%;
+}
+
+.card h2,
+.card h3,
+.card h4 {
+    font-family: 'Gaegu', sans-serif;
+    color: #333;
+}
+
+.card p{
+    font-family: 'Gaegu', sans-serif;
+    color: #333;
+    font-size: 18px;
+}
+
+.card img {
+    max-width: 100%; /* Set max-width to 100% to ensure the image stays within the card */
+    height: auto; /* Maintain the aspect ratio of the image */
+    
+    border-radius: 10px; /* Add border-radius to the image */
+    margin-top: 20px; /* Adjust margin as needed */
+}

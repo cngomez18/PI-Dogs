@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import '../styles/Card.css'
 
 
 function Card({ id, onClose, name, weight, temperaments, image }) {
@@ -15,7 +16,7 @@ function Card({ id, onClose, name, weight, temperaments, image }) {
     : `${weight} kg`;
 
   return (
-    <div>
+    <div className="card">
      
       {
          pathname === '/home' && <button onClick={() => onClose(id)}>X</button>

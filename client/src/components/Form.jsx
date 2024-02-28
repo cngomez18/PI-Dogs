@@ -1,6 +1,7 @@
 import { useState } from "react"
 import FormValidation from "../FormValidation"
-import styles from "../styles/Form-styles.css?inline"
+import styles from "../styles/Form.css?inline"
+import '../styles/Form.css'
 import axios from 'axios'
 
 export default function Form({ availableTemperaments }){
@@ -81,7 +82,8 @@ export default function Form({ availableTemperaments }){
       
 
     return(
-        <div>
+        <div className='form-body'>
+        <div className="card-container">
             <form onSubmit={handleSubmit}>
 
                 <label htmlFor="name">
@@ -102,7 +104,7 @@ export default function Form({ availableTemperaments }){
                 
                 <br/>
 
-                { errors.minHeight && <p className={styles.danger}> {errors.minHeight} </p> }
+                { errors.height && <p className={styles.danger}> {errors.height} </p> }
 
                 <label htmlFor="maxHeight">
                     Maximum Height (cm):
@@ -111,7 +113,7 @@ export default function Form({ availableTemperaments }){
 
                 <br/>
 
-                { errors.maxHeight && <p className={styles.danger}> {errors.maxHeight} </p> }
+                { errors.height && <p className={styles.danger}> {errors.height} </p> }
 
                 <label htmlFor="minWeight">
                     Minimum Weight (kg):
@@ -120,7 +122,7 @@ export default function Form({ availableTemperaments }){
 
                 <br/>
 
-                { errors.minWeight && <p className={styles.danger}> {errors.minWeight} </p> }
+                { errors.weight && <p className={styles.danger}> {errors.weight} </p> }
 
                 <label htmlFor="maxWeight">
                     Maximum Weight (kg):
@@ -129,7 +131,7 @@ export default function Form({ availableTemperaments }){
 
                 <br/>
 
-                { errors.maxWeight && <p className={styles.danger}> {errors.maxWeight} </p> }
+                { errors.weight && <p className={styles.danger}> {errors.weight} </p> }
 
                 <label htmlFor="lifespan">
                     Lifespan (years):
@@ -142,20 +144,25 @@ export default function Form({ availableTemperaments }){
 
                 <label>
                     Temperaments:
+                </label>
+
+                <div className='temperament-container'>
+
                     {availableTemperaments.map((temperament) => (
-                        <div key={temperament}>
+                    <div key={temperament} className='temperament-checkbox'>
                         <input
-                            type="checkbox"
-                            id={temperament}
-                            name="temperaments"
-                            value={temperament}
-                            checked={dogData.temperaments.includes(temperament)}
-                            onChange={() => handleTemperamentsChange(toggleTemperament(temperament))}
+                        type="checkbox"
+                        id={temperament}
+                        name="temperaments"
+                        value={temperament}
+                        checked={dogData.temperaments.includes(temperament)}
+                        onChange={() => handleTemperamentsChange(toggleTemperament(temperament))}
                         />
                         <label htmlFor={temperament}>{temperament}</label>
-                        </div>
+                    </div>
                     ))}
-                </label>
+                
+                </div>
 
                 <br/>
                 
@@ -168,5 +175,6 @@ export default function Form({ availableTemperaments }){
 
             
         </div>  
+        </div>
     )
 }

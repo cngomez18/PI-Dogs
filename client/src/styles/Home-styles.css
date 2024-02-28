@@ -1,0 +1,13 @@
+.home-container{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-image: url('dog-pattern.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat; /* Add this line to make the background image repeat */
+    min-height: 100vh; /* Adjust the min-height as needed */
+    
+}

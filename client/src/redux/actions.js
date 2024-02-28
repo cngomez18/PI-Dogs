@@ -1,4 +1,4 @@
-import { FILTER_ORIGIN, FILTER_TEMPERAMENT, SORT_ALPHABETICAL, SORT_WEIGHT, SET_DOGS, SET_SEARCH_RESULTS } from "./actionTypes"
+import { FILTER_ORIGIN, FILTER_TEMPERAMENT, SORT_ALPHABETICAL, SORT_WEIGHT, SET_DOGS, SET_SEARCH_RESULTS, SET_CURRENT_PAGE } from "./actionTypes"
 import axios from "axios";
 
 export const filterTemperament = (temperament) => ({
@@ -26,12 +26,17 @@ export const setDogs = (dogs) => ({
     payload: { dogs },
 });
 
+export const setCurrentPage = (currentPage) => ({
+  type: SET_CURRENT_PAGE,
+  payload: currentPage,
+});
+
 export const setSearchResults = (results) => (
 
-    {
-        type: SET_SEARCH_RESULTS,
-        payload: results,
-    }
+  {
+    type: SET_SEARCH_RESULTS,
+    payload: results,
+  }
 )
   
 export const searchDogs = (query) => async (dispatch) => {

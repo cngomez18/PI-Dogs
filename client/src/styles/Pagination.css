@@ -1,0 +1,20 @@
+/* Add these styles to your CSS file */
+
+.pagination-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px; /* Adjust margin as needed */
+}
+  
+.rounded-button {
+    padding: 8px 16px;
+    border-radius: 20px; /* Rounded border */
+    background-color: #fbbd6a;
+    color: #715c49;
+    border: none;
+    cursor: pointer;
+    font-family: 'Gaegu', sans-serif;
+    font-size: 14px; /* Adjust font size as needed */
+}
+  

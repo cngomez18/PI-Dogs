@@ -1,0 +1,63 @@
+/* form.css */
+.form-body {
+    margin: 0;
+    padding: 0;
+    background-image: url('dog-surround.jpg'); /* Replace with your actual background image */
+    background-size: cover;
+    font-family: 'Gaegu', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+  
+.card-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 1000px;
+    margin: 20px auto; /* Add margin to create space from the top */
+    overflow: hidden; /* Hide any content that might overflow */
+    box-sizing: border-box;
+}
+
+  
+button[type="submit"] {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fbbd6a;
+    color: #715c49;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+  
+  /* Style the inputs */
+input[type="text"],
+input[type="number"] {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+  
+/* Show 10 temperaments in each row */
+.temperament-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the temperaments horizontally */
+    align-items: flex-start; /* Align the temperaments to the top */
+    margin-top: 10px; /* Add top margin for spacing */
+    max-height: 150px; /* Set a maximum height for the temperament container */
+    overflow-y: auto; /* Add a vertical scrollbar if the content overflows */
+}
+  
+.temperament-checkbox {
+    flex-basis: calc(10% - 10px);
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}

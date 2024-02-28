@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import '../styles/Detail.css'
 
 /*ID.
 Imagen.
@@ -30,9 +31,9 @@ export default function Detail(){
   }, [id]);
 
   return(
-    <div>
+    <div className="detail-container">
     {dog.name ? (
-      <div>
+      <div className="detail-card">
         <h2>Name: {dog.name} </h2>
         <h4>Height: {dog.height.metric} cm</h4>
         <h4>Weight: {dog.weight.metric} kg</h4>

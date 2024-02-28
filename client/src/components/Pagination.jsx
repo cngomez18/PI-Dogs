@@ -1,38 +1,57 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import Cards from './Cards';
+import { setCurrentPage, setDogs } from '../redux/actions';
+import '../styles/Pagination.css'
 
-export default function Pagination({ onClose, dogs}) {
-    const [currentPage, setCurrentPage] = useState(1);
-    const dogsPerPage = 8; 
+function Pagination({ onClose, dogs, currentPage, setCurrentPage }) {
+  const dogsPerPage = 8;
 
-    const totalPages = Math.ceil(dogs.length / dogsPerPage);
+  // Calculate total pages based on the number of dogs
+  const totalPages = Math.ceil(dogs.length / dogsPerPage);
 
-    const startIndex = (currentPage - 1) * dogsPerPage;
-    const endIndex = startIndex + dogsPerPage;
+  // Calculate the start and end index of dogs for the current page
+  const startIndex = (currentPage - 1) * dogsPerPage;
+  const endIndex = Math.min(startIndex + dogsPerPage, dogs.length);
+  const dogsOnCurrentPage = dogs.slice(startIndex, endIndex);
 
-    const dogsOnCurrentPage = dogs.slice(startIndex, endIndex);
+  const dispatch = useDispatch();
 
-    const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    };
+  useEffect(() => {
+    // Dispatch the setDogs action when dogs or currentPage changes
+    dispatch(setDogs(dogsOnCurrentPage));
+  }, [dispatch, dogs, currentPage, dogsOnCurrentPage]);
 
-    const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    };
+  return (
+    <div className='pagination-container'>
+      <Cards dogs={dogsOnCurrentPage} onClose={onClose} />
 
-    return (
-    <div>
-        <Cards dogs={dogsOnCurrentPage} onClose={onClose} />
+      <div className="pagination-buttons">
         {/* Pagination controls */}
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            Previous Page
+        <button
+          onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
+          disabled={currentPage === 1}
+          className="rounded-button">
+          Previous Page
         </button>
-        
+
         <span>{`Page ${currentPage} of ${totalPages}`}</span>
 
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-            Next Page
+        <button
+          onClick={() =>
+            setCurrentPage(Math.min(currentPage + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+          className="rounded-button">
+          Next Page
         </button>
+      </div>
     </div>
-);
+  );
 }
+
+const mapStateToProps = (state) => ({
+  currentPage: state.currentPage,
+});
+
+export default connect(mapStateToProps, { setCurrentPage })(Pagination);

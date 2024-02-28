@@ -1,9 +1,10 @@
 // reducer.js
-import{FILTER_ORIGIN, FILTER_TEMPERAMENT, SORT_ALPHABETICAL, SORT_WEIGHT, SET_DOGS, SET_SEARCH_RESULTS} from './actionTypes'
+import{FILTER_ORIGIN, FILTER_TEMPERAMENT, SORT_ALPHABETICAL, SORT_WEIGHT, SET_DOGS, SET_SEARCH_RESULTS, SET_CURRENT_PAGE} from './actionTypes'
 
 const initialState = {
   dogs: [], 
   searchResults: [],
+  currentPage: 1,
 };
   
 const reducer = (state = initialState, action) => {
@@ -70,6 +71,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         searchResults: action.payload,
     };
+
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
 
     default:
       return state;

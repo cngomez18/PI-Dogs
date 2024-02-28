@@ -2,9 +2,10 @@ import Card from './Card';
 import { connect, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { filterTemperament, filterOrigin, sortAlphabetical, sortWeight, setDogs, searchDogs  } from '../redux/actions.js';
+import '../styles/Cards.css'
+import { filterTemperament, filterOrigin, sortAlphabetical, sortWeight, setDogs, searchDogs, setCurrentPage } from '../redux/actions.js';
 
-function Cards({ dogs, onClose, searchResults ,applySortWeight, applyFilterOrigin, applyFilterTemperament, applySortAlphabetical, applySetDogs, applySearchDogs}) {
+function Cards({ dogs, onClose, searchResults ,applySortWeight, applyFilterOrigin, applyFilterTemperament, applySortAlphabetical, applySetDogs, applySearchDogs, currentPage, setCurrentPage, totalPages}) {
  
   console.log('Received Props in Cards:', { dogs });
 
@@ -51,42 +52,54 @@ function Cards({ dogs, onClose, searchResults ,applySortWeight, applyFilterOrigi
     }
   };
 
+  const handlePrevPage = () => {
+    setCurrentPage(Math.max(currentPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(Math.min(currentPage + 1, totalPages));
+  };
 
   return (
-    <div>
+    
+    <div >
+      <div className="filter-bar">
 
-      <select onChange={handleFilterTemp}>
-      <option value="reset">Temperaments</option>
-        {temperaments.slice(0, 10).map((temperament, index) => (
-          <option key={index} value={temperament}>
-            {temperament}
-          </option>
-        ))}
-      </select>
+        <select onChange={handleFilterTemp}>
+          <option value="reset">Temperaments</option>
+            {temperaments.slice(0, 10).map((temperament, index) => (
+              <option key={index} value={temperament}>
+                {temperament}
+              </option>
+            ))}
+        </select>
 
+        {/*<button onClick={() => applyFilterOrigin(dogs[0]?.origin)}>
+          Filter by Origin
+        </button>*/}
 
-      {/*<button onClick={() => applyFilterOrigin(dogs[0]?.origin)}>
-        Filter by Origin
-      </button>*/}
+        <button onClick={applySortAlphabetical}>Sort Alphabetically</button>
 
-      <button onClick={applySortAlphabetical}>Sort Alphabetically</button>
+        <button onClick={applySortWeight}>Sort by Weight</button>
+      </div>
 
-      <button onClick={applySortWeight}>Sort by Weight</button>
-
-
-
-      {dogs.map(dog =>( 
-        <Card 
-          key={dog.id}
-          id={dog.id}
-          name={dog.name}
-          weight={dog.weight}
-          temperaments={dog.temperaments}
-          image={dog.image}
-          onClose={() => onClose(dog.id)}
-        />
-      ) )}
-
+      <br/>
+      <div className="cards-container">
+        {dogs.map(dog =>( 
+          <div key={dog.id} >
+            <Card 
+              id={dog.id}
+              name={dog.name}
+              weight={dog.weight}
+              temperaments={dog.temperaments}
+              image={dog.image}
+              onClose={() => onClose(dog.id)}
+            />
+          </div>
+        ) )}
+      </div>
+       
+       
     </div>
   )
 }
@@ -95,6 +108,7 @@ const mapStateToProps = (state) => {
   return {
     dogs: state.dogs,
     searchResults: state.searchResults,
+    currentPage: state.currentPage,
   };
 };
 
@@ -106,6 +120,7 @@ const mapDispatchToProps = (dispatch) => ({
   applySortWeight: () => dispatch(sortWeight()),
   applySetDogs: (dogs) => dispatch(setDogs(dogs)),
   applySearchDogs: (query) => dispatch(searchDogs(query)),
+  setCurrentPage: (page) => dispatch(setCurrentPage(page)),
 });
 
 
